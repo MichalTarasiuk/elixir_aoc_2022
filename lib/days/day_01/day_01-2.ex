@@ -1,9 +1,9 @@
 defmodule ElixirAoc2022.Day01.Part2 do
-  def read do
+  defp read do
     File.read!(File.cwd!() <> "/lib/days/day_01/input.txt")
   end
 
-  def string_to_integer(str) do
+  defp string_to_integer(str) do
     parse_result = Integer.parse(str)
 
     cond do
@@ -15,7 +15,7 @@ defmodule ElixirAoc2022.Day01.Part2 do
     end
   end
 
-  def solve do
+  def get_summed_entries do
     input = read()
 
     input
@@ -28,6 +28,14 @@ defmodule ElixirAoc2022.Day01.Part2 do
           Enum.map(x, &string_to_integer(&1)) |> Enum.sum()
         ]
     end)
+  end
+
+  def solve_part_1 do
+    get_summed_entries()
     |> Enum.max()
+  end
+
+  def solve_part_2 do
+    get_summed_entries() |> Enum.sort(&(&1 >= &2)) |> Enum.slice(0..2) |> Enum.sum()
   end
 end
