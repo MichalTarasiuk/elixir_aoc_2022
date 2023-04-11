@@ -29,12 +29,12 @@ defmodule ElixirAoc2022.Day03 do
     List.foldl(splitted_input, 0, fn rucksack, acc ->
       splitted_rucksack = String.split(rucksack, "", trim: true)
 
-      divider = div(length(splitted_rucksack), 2)
+      divider = length(splitted_rucksack) |> div(2)
 
       first_compartment = Enum.slice(splitted_rucksack, 0..divider - 1)
       second_compartment = Enum.slice(splitted_rucksack, divider..length(splitted_rucksack))
 
-      letter = Enum.at(intersection(first_compartment, second_compartment), 0)
+      letter = intersection(first_compartment, second_compartment) |> Enum.at(0)
 
       acc +  @letter_to_point[letter]
     end)
