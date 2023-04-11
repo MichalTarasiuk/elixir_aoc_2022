@@ -87,7 +87,7 @@ defmodule ElixirAoc2022.Day02 do
   defp calculate_my_score(rounds) when is_list(rounds) do
     List.foldl(rounds, 0, fn round, acc ->
       [opponent_shape, my_shape] =
-        Enum.map(String.split(round, " "), &(@letter_to_shape[&1 |> String.to_atom()]))
+        Enum.map(String.split(round, " "), &@letter_to_shape[&1 |> String.to_atom()])
 
       acc + @shape_score[my_shape] +
         @outcome_round_score[get_round_outcome(opponent_shape, my_shape)]
