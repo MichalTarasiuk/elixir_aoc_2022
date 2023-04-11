@@ -57,6 +57,13 @@ defmodule ElixirAoc2022.Day02 do
     [@scissors, @paper] => @loss
   }
 
+  defp get_splitted_input do
+    splitted_input = ElixirAoc2022.Utils.read_input("/lib/days/day_02/input.txt")
+
+    splitted_input
+    |> String.split("\n")
+  end
+
   defp rules_to_shape_letters(splitted_input) when is_list(splitted_input) do
     splitted_input
     |> Enum.map(fn element ->
@@ -65,7 +72,6 @@ defmodule ElixirAoc2022.Day02 do
       opponent_shape = @letter_to_shape[opponent_letter_shape |> String.to_atom()]
 
       my_shape = @rules[opponent_shape][my_letter_shape |> String.to_atom()]
-      IO.puts(my_shape)
       my_letter_shape = @shape_to_letter[my_shape]
 
       "#{opponent_letter_shape} #{my_letter_shape}"
@@ -79,8 +85,6 @@ defmodule ElixirAoc2022.Day02 do
   end
 
   defp calculate_my_score(rounds) when is_list(rounds) do
-    IO.inspect(rounds)
-
     List.foldl(rounds, 0, fn round, acc ->
       [opponent_shape, my_shape] =
         Enum.map(String.split(round, " "), fn letter ->
@@ -93,18 +97,12 @@ defmodule ElixirAoc2022.Day02 do
   end
 
   def solve_part_1 do
-    splitted_input = ElixirAoc2022.Utils.read_input("/lib/days/day_02/input.txt")
-
-    splitted_input
-    |> String.split("\n")
+    get_splitted_input()
     |> calculate_my_score()
   end
 
   def solve_part_2 do
-    splitted_input = ElixirAoc2022.Utils.read_input("/lib/days/day_02/input.txt")
-
-    splitted_input
-    |> String.split("\n")
+    get_splitted_input()
     |> rules_to_shape_letters()
     |> calculate_my_score()
   end
