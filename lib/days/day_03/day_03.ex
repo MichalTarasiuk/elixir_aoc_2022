@@ -31,12 +31,12 @@ defmodule ElixirAoc2022.Day03 do
 
       divider = length(splitted_rucksack) |> div(2)
 
-      first_compartment = Enum.slice(splitted_rucksack, 0..divider - 1)
+      first_compartment = Enum.slice(splitted_rucksack, 0..(divider - 1))
       second_compartment = Enum.slice(splitted_rucksack, divider..length(splitted_rucksack))
 
       letter = intersection(first_compartment, second_compartment) |> Enum.at(0)
 
-      acc +  @letter_to_point[letter]
+      acc + @letter_to_point[letter]
     end)
   end
 end
