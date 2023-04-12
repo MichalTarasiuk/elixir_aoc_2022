@@ -12,10 +12,9 @@ defmodule ElixirAoc2022.Day01 do
   end
 
   defp get_summed_entries do
-    input = ElixirAoc2022.Utils.read_input("/lib/days/day_01/input.txt")
+    input = ElixirAoc2022.Utils.get_splitted_input("/lib/days/day_01/input.txt")
 
     input
-    |> String.split("\n")
     |> Enum.chunk_by(&(&1 == ""))
     |> Enum.flat_map(fn x ->
       if x === [""],

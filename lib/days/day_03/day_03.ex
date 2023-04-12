@@ -9,13 +9,6 @@ defmodule ElixirAoc2022.Day03 do
                      end)
                    )
 
-  defp get_splitted_input do
-    splitted_input = ElixirAoc2022.Utils.read_input("/lib/days/day_03/input.txt")
-
-    splitted_input
-    |> String.split("\n")
-  end
-
   defp intersection_2(list1, list2) do
     m1 = MapSet.new(list1)
     m2 = MapSet.new(list2)
@@ -30,7 +23,7 @@ defmodule ElixirAoc2022.Day03 do
   end
 
   def solve_part_1 do
-    splitted_input = get_splitted_input()
+    splitted_input = ElixirAoc2022.Utils.get_splitted_input("/lib/days/day_03/input.txt")
 
     List.foldl(splitted_input, 0, fn rucksack, acc ->
       splitted_rucksack = String.split(rucksack, "", trim: true)
@@ -47,7 +40,7 @@ defmodule ElixirAoc2022.Day03 do
   end
 
   def solve_part_2 do
-    splitted_input = get_splitted_input()
+    splitted_input = ElixirAoc2022.Utils.get_splitted_input("/lib/days/day_03/input.txt")
 
     splitted_input
     |> Enum.chunk_every(3, 3, :discard)
