@@ -16,7 +16,7 @@ defmodule ElixirAoc2022.Day05 do
       ~r/^move (\d+) from (\d) to (\d)$/
       |> Regex.run(line, capture: :all_but_first)
       |> Enum.map(&String.to_integer(&1))
-      |> then(fn [count, from_label, to_label] -> {from_label, to_label, count} end)
+      |> then(&List.to_tuple(&1))
     end)
   end
 
@@ -29,7 +29,7 @@ defmodule ElixirAoc2022.Day05 do
     |> Enum.reject(&(elem(&1, 0) === " "))
   end
 
-  def parse_stacks(stacks) do
+  defp parse_stacks(stacks) do
     stacks
     |> String.split("\n")
     |> Enum.reverse()
@@ -51,8 +51,25 @@ defmodule ElixirAoc2022.Day05 do
     {parse_stacks(stacks), parse_procedures(procedures)}
   end
 
+  defp move({map, list}) do
+    Enum.reduce(list, map, fn {count, from, to}, acc ->
+      [stringify_from, stringify_to] = Enum.map([from, to], &Integer.to_string(&1))
+
+      %{^stringify_from => from_list, ^stringify_to => to_list} =
+        Map.take(map, [stringify_from, stringify_to])
+
+      {list_part, rest_list} = Enum.split(from_list, count)
+
+      Map.merge(acc, %{
+        stringify_from => rest_list,
+        stringify_to => Enum.concat([list_part, to_list])
+      })
+    end)
+  end
+
   def solve_part_1 do
     get_input()
     |> parse_input()
+    |> move()
   end
 end
