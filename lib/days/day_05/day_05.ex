@@ -9,7 +9,7 @@ defmodule ElixirAoc2022.Day05 do
     |> Enum.drop(-amount)
   end
 
-    defp parse_stack_line(line) do
+  defp parse_stack_line(line) do
     line
     |> String.split("")
     |> drop(2)
