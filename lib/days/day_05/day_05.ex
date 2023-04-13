@@ -9,18 +9,7 @@ defmodule ElixirAoc2022.Day05 do
     |> Enum.drop(-amount)
   end
 
-  defp parse_procedures(procedures) do
-    procedures
-    |> String.split("\n", trim: true)
-    |> Enum.map(fn line ->
-      ~r/^move (\d+) from (\d) to (\d)$/
-      |> Regex.run(line, capture: :all_but_first)
-      |> Enum.map(&String.to_integer(&1))
-      |> then(&List.to_tuple(&1))
-    end)
-  end
-
-  defp parse_stack_line(line) do
+    defp parse_stack_line(line) do
     line
     |> String.split("")
     |> drop(2)
@@ -43,6 +32,17 @@ defmodule ElixirAoc2022.Day05 do
     )
   end
 
+  defp parse_procedures(procedures) do
+    procedures
+    |> String.split("\n", trim: true)
+    |> Enum.map(fn line ->
+      ~r/^move (\d+) from (\d) to (\d)$/
+      |> Regex.run(line, capture: :all_but_first)
+      |> Enum.map(&String.to_integer(&1))
+      |> then(&List.to_tuple(&1))
+    end)
+  end
+
   defp parse_input(input) do
     [stacks, procedures] =
       input
@@ -62,7 +62,7 @@ defmodule ElixirAoc2022.Day05 do
 
       Map.merge(acc, %{
         stringify_from => rest_list,
-        stringify_to => Enum.concat([list_part, to_list])
+        stringify_to => Enum.concat([list_part |> Enum.reverse(), to_list])
       })
     end)
   end
