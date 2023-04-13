@@ -1,5 +1,5 @@
 defmodule ElixirAoc2022.Utils do
-  defp read_input(path) do
+  def read_input(path) do
     File.read!(File.cwd!() <> path)
   end
 
