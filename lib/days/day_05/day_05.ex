@@ -26,6 +26,7 @@ defmodule ElixirAoc2022.Day05 do
     |> drop(2)
     |> Enum.take_every(4)
     |> Enum.with_index(&{&1, Integer.to_string(&2 + 1)})
+    |> Enum.reject(&(elem(&1, 0) === " "))
   end
 
   def parse_stacks(stacks) do
@@ -33,7 +34,13 @@ defmodule ElixirAoc2022.Day05 do
     |> String.split("\n")
     |> Enum.reverse()
     |> Enum.drop(1)
-    |> Enum.map(&parse_stack_line(&1))
+    |> Enum.flat_map(&parse_stack_line(&1))
+    |> Enum.reduce(
+      %{},
+      &Map.update(&2, elem(&1, 1), [elem(&1, 0)], fn existing_value ->
+        [elem(&1, 0) | existing_value]
+      end)
+    )
   end
 
   defp parse_input(input) do
