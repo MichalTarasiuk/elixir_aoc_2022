@@ -52,24 +52,28 @@ defmodule ElixirAoc2022.Day05 do
   end
 
   defp move({map, list}) do
-    Enum.reduce(list, map, fn {count, from, to}, acc ->
-      [stringify_from, stringify_to] = Enum.map([from, to], &Integer.to_string(&1))
+    Enum.reduce(list, map, fn {count, source, dest}, acc ->
+      stringify_source = Integer.to_string(source)
+      source_list = Map.get(acc, stringify_source)
 
-      %{^stringify_from => from_list, ^stringify_to => to_list} =
-        Map.take(map, [stringify_from, stringify_to])
+      {to_move, to_remain} = Enum.split(source_list, count)
 
-      {list_part, rest_list} = Enum.split(from_list, count)
-
-      Map.merge(acc, %{
-        stringify_from => rest_list,
-        stringify_to => Enum.concat([list_part |> Enum.reverse(), to_list])
-      })
+      acc
+      |> Map.put(stringify_source, to_remain)
+      |> Map.update!(Integer.to_string(dest), &Enum.concat([to_move |> Enum.reverse(), &1]))
     end)
+  end
+
+  defp get_creates(map) do
+    map
+    |> Enum.map(fn {_stack_label, [crate | _]} -> crate end)
+    |> to_string()
   end
 
   def solve_part_1 do
     get_input()
     |> parse_input()
     |> move()
+    |> get_creates()
   end
 end
