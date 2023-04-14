@@ -45,7 +45,9 @@ defmodule ElixirAoc2022.Day05 do
     {parse_stacks(stacks), parse_procedures(procedures)}
   end
 
-  defp move({map, list}) do
+  defp move({map, list}, format: format_method) do
+    IO.inspect(format_method)
+
     Enum.reduce(list, map, fn {count, source, dest}, acc ->
       stringify_source = Integer.to_string(source)
       source_list = Map.get(acc, stringify_source)
@@ -54,7 +56,7 @@ defmodule ElixirAoc2022.Day05 do
 
       acc
       |> Map.put(stringify_source, to_remain)
-      |> Map.update!(Integer.to_string(dest), &Enum.concat([to_move |> Enum.reverse(), &1]))
+      |> Map.update!(Integer.to_string(dest), &Enum.concat([format_method.(to_move), &1]))
     end)
   end
 
@@ -67,7 +69,14 @@ defmodule ElixirAoc2022.Day05 do
   def solve_part_1 do
     get_input()
     |> parse_input()
-    |> move()
+    |> move(format: &Enum.reverse/1)
+    |> get_creates()
+  end
+
+  def solve_part_2 do
+    get_input()
+    |> parse_input()
+    |> move(format: &Function.identity/1)
     |> get_creates()
   end
 end
