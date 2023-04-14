@@ -3,16 +3,10 @@ defmodule ElixirAoc2022.Day05 do
     ElixirAoc2022.Utils.read_input("/lib/days/day_05/input.txt")
   end
 
-  defp drop(list, amount) do
-    list
-    |> Enum.drop(amount)
-    |> Enum.drop(-amount)
-  end
-
   defp parse_stack_line(line) do
     line
     |> String.split("")
-    |> drop(2)
+    |> ElixirAoc2022.Utils.drop(2)
     |> Enum.take_every(4)
     |> Enum.with_index(&{&1, Integer.to_string(&2 + 1)})
     |> Enum.reject(&(elem(&1, 0) === " "))

@@ -9,4 +9,10 @@ defmodule ElixirAoc2022.Utils do
     splitted_input
     |> String.split("\n")
   end
+
+  def drop(list, amount) do
+    list
+    |> Enum.drop(amount)
+    |> Enum.drop(-amount)
+  end
 end
