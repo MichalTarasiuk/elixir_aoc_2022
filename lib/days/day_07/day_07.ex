@@ -14,9 +14,9 @@ defmodule ElixirAoc2022.Day07 do
   end
 
   def solve_part_1 do
-    splitted_input = ElixirAoc2022.Utils.read_input("/lib/days/day_07/input.txt")
+    input = ElixirAoc2022.Utils.read_input("/lib/days/day_07/input.txt")
 
-    splitted_input
+    input
     |> parse_input()
   end
 end
