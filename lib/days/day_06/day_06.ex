@@ -1,9 +1,9 @@
 defmodule ElixirAoc2022.Day06 do
-  def has_duplicates(list) do
+  defp has_duplicates(list) do
     length(list) != list |> Enum.uniq() |> length()
   end
 
-  def find_marker(marker_length) do
+  defp find_marker(marker_length) do
     input = ElixirAoc2022.Utils.read_input("/lib/days/day_06/input.txt")
     splitted_input = String.split(input, "", trim: true)
 
