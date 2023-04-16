@@ -1,11 +1,16 @@
 defmodule ElixirAoc2022.Day07 do
   @size_limit 100_000
 
-  def parse_input(input) do
-    input 
+  def split_input(input) do
+    input
     |> String.replace(~r/\$ cd (\w+|\/)/, "$ cd\n\\g{1}")
-    |> String.split(~r/\$ cd( ..)?\n/, trim: true)
+    |> String.split(~r/\$ cd(\s..)?\n/, trim: true)
     |> Enum.map(&String.split(&1, "\n", trim: true))
+  end
+
+  def parse_input(input) do
+    input
+    |> split_input()
   end
 
   def solve_part_1 do
