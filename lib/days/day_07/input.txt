@@ -938,4 +938,146 @@ $ cd ..
 $ cd jtp
 $ ls
 dir clh
-$ cd…
+$ cd clh
+$ ls
+54117 sdwnsgwv.mjm
+$ cd ..
+$ cd ..
+$ cd ..
+$ cd mwfbthpj
+$ ls
+75900 zwslwbr.chm
+$ cd ..
+$ cd swqbph
+$ ls
+307258 jrlljc.ntl
+$ cd ..
+$ cd ..
+$ cd nblfzrb
+$ ls
+106071 zdjg.qsj
+$ cd ..
+$ cd zvfg
+$ ls
+311338 zvspnvfr.dqj
+$ cd ..
+$ cd ..
+$ cd qjjjgd
+$ ls
+dir cdmwgn
+dir fqmln
+285733 gfprhn.rjj
+dir gswsc
+dir htpzdb
+261929 jwc
+dir lvzpqqv
+dir mlc
+dir mzbpmhf
+329303 sdwnsgwv.mjm
+76120 vmpgqbcd
+$ cd cdmwgn
+$ ls
+dir bttff
+$ cd bttff
+$ ls
+dir nblfzrb
+$ cd nblfzrb
+$ ls
+346048 jhc.hzf
+dir nccq
+dir rwtddj
+149890 sdwnsgwv.mjm
+$ cd nccq
+$ ls
+141144 gfprhn.rjj
+65628 hfm
+$ cd ..
+$ cd rwtddj
+$ ls
+dir jctw
+$ cd jctw
+$ ls
+141075 thcfz.frn
+$ cd ..
+$ cd ..
+$ cd ..
+$ cd ..
+$ cd ..
+$ cd fqmln
+$ ls
+282233 cjgh
+$ cd ..
+$ cd gswsc
+$ ls
+153758 ccjg.zml
+dir cllgt
+257967 ctqdpq.clq
+117673 jhc
+258604 wqcz.tww
+122135 zvspnvfr.grb
+$ cd cllgt
+$ ls
+132862 vmpgqbcd
+$ cd ..
+$ cd ..
+$ cd htpzdb
+$ ls
+dir hfm
+dir mlplp
+231759 nblfzrb
+159823 pqpbjbqp
+25382 vzgwwjq.zbp
+$ cd hfm
+$ ls
+155413 bbbsd
+288638 jhhmwq
+dir lnss
+$ cd lnss
+$ ls
+341786 zvspnvfr
+$ cd ..
+$ cd ..
+$ cd mlplp
+$ ls
+256802 zhcq.gzj
+$ cd ..
+$ cd ..
+$ cd lvzpqqv
+$ ls
+dir cgj
+dir mdb
+dir shpdtb
+$ cd cgj
+$ ls
+74595 nblfzrb.lcc
+$ cd ..
+$ cd mdb
+$ ls
+167891 zvspnvfr.ldc
+$ cd ..
+$ cd shpdtb
+$ ls
+45889 bvff.hsf
+92447 sdwnsgwv.mjm
+$ cd ..
+$ cd ..
+$ cd mlc
+$ ls
+7978 mrblf
+$ cd ..
+$ cd mzbpmhf
+$ ls
+38713 jhbs
+$ cd ..
+$ cd ..
+$ cd whrtnh
+$ ls
+dir jbbwzd
+dir nblfzrb
+$ cd jbbwzd
+$ ls
+88613 jhc.qqw
+$ cd ..
+$ cd nblfzrb
+$ ls
+164792 zlnbcwr
