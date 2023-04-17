@@ -21,23 +21,38 @@ defmodule ElixirAoc2022.Day07 do
         String.replace(directory_value, @file_regexp, "\\g{1}") |> String.to_integer()
 
       ^is_directory ->
-        String.replace(directory_value, ~r/dir\s(\w+)/, "\\g{1}")
+        String.replace(directory_value, @directory_regxp, "\\g{1}")
+        |> then(fn directory_name ->
+          directory_line = Map.get(directories, directory_name)
+
+          if directory_line, do: parse_directory_values(directories, directory_line), else: 0
+        end)
 
       true ->
         0
     end
   end
 
+  defp parse_directory_values(directories, directory_line) do
+    directory_values = String.split(directory_line, "\n", trim: true)
+
+    directory_values
+    |> Enum.map(&parse_directory_value(directories, &1))
+    |> List.flatten()
+    |> Enum.sum()
+  end
+
   defp get_size_of_directories(directories) do
     directories
     |> Map.keys()
     |> Enum.map(fn directory_name ->
-      directory_values = Map.fetch!(directories, directory_name)
+      directory_line = Map.fetch!(directories, directory_name)
 
-      directory_values
-      |> String.split("\n", trim: true)
-      |> Enum.map(&parse_directory_value(directories, &1))
+      directory_line
+      |> then(&parse_directory_values(directories, &1))
+      |> then(&{directory_name, &1})
     end)
+    |> Map.new()
   end
 
   def solve_part_1 do
