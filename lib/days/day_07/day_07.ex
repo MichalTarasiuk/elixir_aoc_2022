@@ -37,6 +37,7 @@ defmodule ElixirAoc2022.Day07 do
 
     splitted_input
     |> Enum.reduce({@initial_path, %{}}, fn element, {path, directories} ->
+      forward_path = move_forward(path, element)
       back_path = move_back(path)
 
       cond do
@@ -44,7 +45,7 @@ defmodule ElixirAoc2022.Day07 do
           {back_path, Map.put_new(directories, back_path, [])}
 
         is_move_forward_cmd(element) ->
-          {move_forward(path, element), Map.put_new(directories, move_forward(path, element), [])}
+          {forward_path, Map.put_new(directories, forward_path, [])}
 
         true ->
           {path, directories}
