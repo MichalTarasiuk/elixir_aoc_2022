@@ -100,7 +100,9 @@ defmodule ElixirAoc2022.Day07 do
 
   defp sum_directories_with_size_limit(directories) do
     directories
-    |> Enum.flat_map(fn {_directory_name, directory_value} -> if directory_value <= @size_limit, do: [directory_value], else: [] end)
+    |> Enum.flat_map(fn {_directory_name, directory_value} ->
+      if directory_value <= @size_limit, do: [directory_value], else: []
+    end)
     |> Enum.sum()
   end
 
