@@ -10,6 +10,18 @@ defmodule ElixirAoc2022.Day07 do
   @move_forward_cmd_regexp ~r/^\$ cd (\/|(\w+))$/
   @move_back_cmd "$ cd .."
 
+  defp is_filename(element) do
+    String.match?(element, @file_regexp)
+  end
+
+  defp is_directory(element) do
+    String.match?(element, @directory_regexp)
+  end
+
+  defp is_directory_element(element) do
+    is_directory(element) || is_filename(element)
+  end
+
   defp add_prefix(str, prefix) do
     cond do
       String.length(str) != 0 -> "#{prefix}#{str}"
@@ -32,9 +44,7 @@ defmodule ElixirAoc2022.Day07 do
     current_path <> add_prefix(name, "/")
   end
 
-  def parse_input do
-    splitted_input = ElixirAoc2022.Utils.get_splitted_input("/lib/days/day_07/input.txt")
-
+  defp parse_input(splitted_input) do
     splitted_input
     |> Enum.reduce({@initial_path, %{}}, fn element, {path, directories} ->
       forward_path = move_forward(path, element)
@@ -47,9 +57,52 @@ defmodule ElixirAoc2022.Day07 do
         is_move_forward_cmd(element) ->
           {forward_path, Map.put_new(directories, forward_path, [])}
 
+        is_directory_element(element) ->
+          {path, Map.update!(directories, path, &[element | &1])}
+
         true ->
           {path, directories}
       end
     end)
+  end
+
+  defp parse_directory_value(directories, {directory_name, directory_value}) do
+    directory_value
+    |> Enum.map(fn directory_elemenet ->
+      cond do
+        is_filename(directory_elemenet) ->
+          String.replace(directory_elemenet, @file_regexp, "\\g{1}") |> String.to_integer()
+
+        is_directory(directory_elemenet) ->
+          String.replace(directory_elemenet, @directory_regexp, "/\\g{1}")
+          |> then(fn next_directory_path ->
+            next_directory_name = directory_name <> next_directory_path
+
+            parse_directory_value(
+              directories,
+              {next_directory_name, Map.get(directories, next_directory_name)}
+            )
+          end)
+
+        true ->
+          0
+      end
+    end)
+    |> List.flatten()
+    |> Enum.sum()
+  end
+
+  defp parse_directory_values(directories) do
+    directories
+    |> Enum.map(&{elem(&1, 0), parse_directory_value(directories, &1)})
+    |> Map.new()
+  end
+
+  def solve_part_1 do
+    splitted_input = ElixirAoc2022.Utils.get_splitted_input("/lib/days/day_07/input.txt")
+
+    splitted_input
+    |> parse_input()
+    |> then(&parse_directory_values(elem(&1, 1)))
   end
 end
