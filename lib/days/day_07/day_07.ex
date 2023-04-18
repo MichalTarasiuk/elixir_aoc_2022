@@ -98,11 +98,18 @@ defmodule ElixirAoc2022.Day07 do
     |> Map.new()
   end
 
+  defp sum_directories_with_size_limit(directories) do
+    directories
+    |> Enum.flat_map(fn {_directory_name, directory_value} -> if directory_value <= @size_limit, do: [directory_value], else: [] end)
+    |> Enum.sum()
+  end
+
   def solve_part_1 do
     splitted_input = ElixirAoc2022.Utils.get_splitted_input("/lib/days/day_07/input.txt")
 
     splitted_input
     |> parse_input()
     |> then(&parse_directory_values(elem(&1, 1)))
+    |> sum_directories_with_size_limit()
   end
 end
